@@ -1,10 +1,18 @@
-import { NextResponse } from "next/server";
-import fs from "fs/promises";
-import path from "path";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
+    let body;
+    try {
+      body = await request.json();
+    } catch (parseError) {
+      console.error("Failed to parse JSON body:", parseError);
+      return NextResponse.json(
+        { success: false, message: "Invalid or missing JSON payload in request." },
+        { status: 400 }
+      );
+    }
+
     const { name, businessName, industry, website, email, phone } = body;
 
     // 1. Basic presence check
@@ -24,36 +32,21 @@ export async function POST(request: Request) {
       );
     }
 
-    // 3. Prepare logging payload entry
+    // 3. Prepare payload entry (safely cast to strings before trimming)
     const newSubmission = {
       id: Math.random().toString(36).substring(2, 9),
-      name: name.trim(),
-      businessName: businessName.trim(),
-      industry: industry.trim(),
-      website: website.trim(),
-      email: email.trim().toLowerCase(),
-      phone: phone.trim(),
+      name: String(name).trim(),
+      businessName: String(businessName).trim(),
+      industry: String(industry).trim(),
+      website: String(website).trim(),
+      email: String(email).trim().toLowerCase(),
+      phone: String(phone).trim(),
       submittedAt: new Date().toISOString(),
     };
 
-    // 4. File append logic
-    const filePath = path.join(process.cwd(), "submissions.json");
-    let submissionsList = [];
-
-    try {
-      const fileData = await fs.readFile(filePath, "utf-8");
-      submissionsList = JSON.parse(fileData);
-    } catch (readError) {
-      // File doesn't exist yet, we start with an empty array
-    }
-
-    submissionsList.push(newSubmission);
-    await fs.writeFile(filePath, JSON.stringify(submissionsList, null, 2), "utf-8");
-
-    // Log internally on the server console
     console.log("Recorded New Growth Assessment Submission:", newSubmission);
 
-    // 5. Notion Integration Sync
+    // 4. Notion Integration Sync
     const notionApiKey = process.env.NOTION_API_KEY;
     const notionDatabaseId = process.env.NOTION_DATABASE_ID;
 
@@ -117,7 +110,7 @@ export async function POST(request: Request) {
         console.error("Failed to post submission to Notion API:", notionError);
       }
     } else {
-      console.log("Notion API Key or Database ID missing. Skipping Notion sync (logged to file).");
+      console.log("Notion API Key or Database ID missing. Skipping Notion sync.");
     }
 
     return NextResponse.json(
@@ -126,8 +119,13 @@ export async function POST(request: Request) {
     );
   } catch (error) {
     console.error("API contact handler error:", error);
+    const errorMsg = error instanceof Error ? error.message : String(error);
+    const errorStack = error instanceof Error ? error.stack : "";
     return NextResponse.json(
-      { success: false, message: "Failed to record request. Server-side processing issue." },
+      { 
+        success: false, 
+        message: `Failed to record request. Server-side processing issue: ${errorMsg}. Stack: ${errorStack}` 
+      },
       { status: 500 }
     );
   }
