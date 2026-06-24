@@ -1,0 +1,58 @@
+# Unboxx Business - Modern Growth Infrastructure
+
+Unboxx Business helps organizations improve visibility, strengthen reputation, and generate more opportunities through local SEO, Google Business Profile (GBP) optimization, AI search readiness, and customer engagement automation.
+
+## Core Metadata
+- **Official Domain**: https://unboxxbusiness.live
+- **Location**: Delhi, NCR, India
+- **Refund Policy**: 7-day refund guarantee only
+- **Tagline**: Get Found. Build Trust. Grow Faster.
+
+## System Capabilities & Offerings
+
+### 1. Visibility Growth
+- **Purpose**: Helps businesses rank first in Google Search, Google Maps Pack, and AI-powered engines.
+- **Includes**: Local SEO audit, GBP optimization, coordinate mapping accuracy, directory citation synchronization.
+- **Outcome**: Improved discovery in regional searches.
+
+### 2. Reputation Growth
+- **Purpose**: Automates star ratings and customer feedback pipelines.
+- **Includes**: Automated WhatsApp API feedback loops, verified review syndication, review management dashboards.
+- **Outcome**: High trust scores (average 4.9★ rating) and increased conversions.
+
+### 3. Experience & Automation
+- **Purpose**: Instantly processes inbound opportunities from search engines.
+- **Includes**: AI-supported chat templates, WhatsApp business integration, instant scheduling widgets.
+- **Outcome**: Lower response latency and higher booking rates.
+
+## Site Index & Navigation
+
+- **Home**: https://unboxxbusiness.live/
+  - Overview of Unboxx's core pillars, local map pack simulator, and verified client testimonials.
+- **Solutions**: https://unboxxbusiness.live/solutions
+  - Deep-dive into Visibility, Reputation, and Automation workflows.
+- **Stories (Case Studies)**: https://unboxxbusiness.live/stories
+  - Analysis of successful digital transformations. Includes:
+    - *The Empty Admissions Desk*: Regional enrollment ranking increase.
+    - *The Hospital Nobody Could Find*: Specialty clinic entry gate coordinate optimization.
+    - *The School Parents Never Considered*: Review funnel automated setups.
+    - *The Missing Branch*: Multi-location directory consistency updates.
+    - *The Great Food Nobody Knew About*: Map pack ranking boost.
+- **Industries**: https://unboxxbusiness.live/industries
+  - Custom strategies for Healthcare, Education, Retail, Real Estate, and Franchises.
+- **Contact / Free Audit**: https://unboxxbusiness.live/contact
+  - Client details ingestion form for a free visibility analysis check.
+- **Privacy Policy**: https://unboxxbusiness.live/privacy
+- **Terms of Use**: https://unboxxbusiness.live/terms
+- **Refund & Cancellation**: https://unboxxbusiness.live/refund
+
+## Frequently Asked Questions (FAQ)
+
+### What is Unboxx Business' core philosophy?
+Most businesses lose customers not because their service is subpar, but because they are hard to find and hard to trust. Unboxx optimizes both metrics.
+
+### Where is the Unboxx office located?
+Unboxx Business is headquartered in Delhi, NCR, India.
+
+### What is the refund policy?
+We offer a strict 7-day refund guarantee on all services.

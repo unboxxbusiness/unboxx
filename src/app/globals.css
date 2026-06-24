@@ -1,0 +1,137 @@
+@import "tailwindcss";
+
+@theme {
+  --color-black: #000000;
+  --color-prussian-blue: #0a0b0d;
+  --color-orange: #ff6600;
+  --color-alabaster-grey: #e8e8e8;
+  --color-white: #ffffff;
+  
+  --color-brand-orange: #ff6600;
+  --color-brand-orange-hover: #e05300;
+  --color-brand-orange-light: #fff5ee;
+  --color-text-charcoal: #161f1d;
+  --color-text-muted: #4a504c;
+  --color-bg-cream: #f8f7f3;
+
+  --font-sans: var(--font-inter), sans-serif;
+  --font-heading: var(--font-poppins), sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+/* Base custom resets */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg-cream);
+  color: var(--color-text-muted);
+  overflow-x: hidden;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg-cream);
+}
+::-webkit-scrollbar-thumb {
+  background: #e1e3e0;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-brand-orange);
+}
+
+/* Evernote Premium Design Utilities */
+@utility card-elevated {
+  background-color: #ffffff;
+  border: 1px solid rgba(22, 31, 29, 0.05);
+  border-radius: 1rem;
+  box-shadow: 0 10px 30px -5px rgba(22, 31, 29, 0.03), 0 2px 8px -2px rgba(22, 31, 29, 0.02);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+@utility card-elevated-hover {
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 40px -8px rgba(22, 31, 29, 0.06), 0 4px 12px -3px rgba(22, 31, 29, 0.03);
+  }
+}
+
+@utility border-grid {
+  border: 1px solid rgba(22, 31, 29, 0.08);
+}
+
+@utility border-grid-b {
+  border-bottom: 1px solid rgba(22, 31, 29, 0.08);
+}
+
+@utility border-grid-t {
+  border-top: 1px solid rgba(22, 31, 29, 0.08);
+}
+
+@utility border-grid-r {
+  border-right: 1px solid rgba(22, 31, 29, 0.08);
+}
+
+@utility border-grid-l {
+  border-left: 1px solid rgba(22, 31, 29, 0.08);
+}
+
+@utility bg-card-dark {
+  background-color: #161f1d;
+}
+
+@utility bg-body-dark {
+  background-color: #0d1412;
+}
+
+@utility text-mono-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-brand-orange);
+}
+
+@utility btn-pill-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background-color: var(--color-brand-orange);
+  color: #ffffff;
+  font-weight: 600;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  &:hover {
+    background-color: var(--color-brand-orange-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 102, 0, 0.2);
+  }
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+@utility btn-pill-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 1.5px solid rgba(22, 31, 29, 0.15);
+  background-color: transparent;
+  color: var(--color-text-charcoal);
+  font-weight: 500;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  &:hover {
+    border-color: var(--color-text-charcoal);
+    background-color: rgba(22, 31, 29, 0.02);
+  }
+}
+
