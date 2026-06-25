@@ -3,6 +3,8 @@ import { Poppins, Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Link from "next/link";
+import Image from "next/image";
+import NetlifyIdentity from "@/components/NetlifyIdentity";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -82,10 +84,12 @@ export default function RootLayout({
               {/* Brand Col */}
               <div className="md:col-span-5 flex flex-col space-y-4">
                 <Link href="/" className="flex items-center">
-                  <img
-                    src="https://res.cloudinary.com/dhrigocvd/image/upload/v1776502814/unboxxbusinesslogo_gmbbok.png"
+                  <Image
+                    src="https://res.cloudinary.com/dhrigocvd/image/upload/f_auto,q_auto/v1776502814/unboxxbusinesslogo_gmbbok.png"
                     alt="Unboxx Business Logo"
-                    className="h-[75px] w-auto object-contain"
+                    width={180}
+                    height={54}
+                    className="w-[150px] h-auto object-contain"
                   />
                 </Link>
                 
@@ -197,6 +201,7 @@ export default function RootLayout({
             </div>
           </div>
         </footer>
+        <NetlifyIdentity />
       </body>
     </html>
   );

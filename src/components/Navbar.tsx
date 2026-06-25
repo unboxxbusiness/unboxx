@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X, ArrowRight } from "lucide-react";
 
@@ -34,20 +35,23 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "py-4 bg-[#f8f7f3]/80 backdrop-blur-md border-b border-black/5 shadow-sm"
-          : "py-6 bg-transparent"
+          ? "py-3 bg-[#f8f7f3]/80 backdrop-blur-md border-b border-black/5 shadow-sm"
+          : "py-4 bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center group">
-          <img
-            src="https://res.cloudinary.com/dhrigocvd/image/upload/v1776502814/unboxxbusinesslogo_gmbbok.png"
+          <Image
+            src="https://res.cloudinary.com/dhrigocvd/image/upload/f_auto,q_auto/v1776502814/unboxxbusinesslogo_gmbbok.png"
             alt="Unboxx Business Logo"
-            className={`w-auto object-contain transition-all duration-300 group-hover:scale-[1.02] ${
+            width={180}
+            height={54}
+            priority
+            className={`h-auto object-contain transition-all duration-300 group-hover:scale-[1.02] ${
               isScrolled
-                ? "h-[36px] md:h-[48px]"
-                : "h-[40px] md:h-[75px]"
+                ? "w-[110px] md:w-[135px] lg:w-[160px]"
+                : "w-[120px] md:w-[150px] lg:w-[180px]"
             }`}
           />
         </Link>
@@ -93,7 +97,7 @@ export default function Navbar() {
 
       {/* Mobile Drawer */}
       <div
-        className={`fixed inset-0 top-[72px] z-40 bg-[#f8f7f3]/98 backdrop-blur-lg border-t border-black/5 md:hidden transition-transform duration-300 ease-in-out ${
+        className={`fixed inset-0 top-[64px] z-40 bg-[#f8f7f3]/98 backdrop-blur-lg border-t border-black/5 md:hidden transition-transform duration-300 ease-in-out ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
