@@ -220,6 +220,35 @@ function renderMarkdown(body: string) {
       continue;
     }
 
+    // Handle Images: ![alt](url)
+    if (line.startsWith("![") && line.endsWith(")")) {
+      const match = line.match(/^!\[(.*?)\]\((.*?)\)$/);
+      if (match) {
+        if (inList) {
+          parsedNodes.push(
+            <ul
+              key={`list-list-${i}`}
+              className="list-disc pl-6 space-y-2 mb-6 text-sm md:text-base leading-relaxed text-text-muted"
+            >
+              {listItems}
+            </ul>
+          );
+          inList = false;
+          listItems = [];
+        }
+        const [, alt, url] = match;
+        parsedNodes.push(
+          <img
+            key={`img-${i}`}
+            src={url}
+            alt={alt}
+            className="rounded-2xl w-full h-auto object-cover my-8 border border-stone-200/60 shadow-sm"
+          />
+        );
+        continue;
+      }
+    }
+
     // Handle Headers
     if (line.startsWith("# ")) {
       parsedNodes.push(
