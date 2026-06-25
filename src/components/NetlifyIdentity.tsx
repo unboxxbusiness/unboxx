@@ -16,6 +16,16 @@ export default function NetlifyIdentity() {
         netlifyIdentity.on("init", (user: any) => {
           if (!user) {
             netlifyIdentity.on("login", handleLogin);
+            
+            // Programmatically trigger the popup if an invite, recovery, or confirmation token is in the hash
+            const hash = window.location.hash;
+            if (
+              hash.includes("invite_token") ||
+              hash.includes("recovery_token") ||
+              hash.includes("confirmation_token")
+            ) {
+              netlifyIdentity.open();
+            }
           }
         });
         netlifyIdentity.init();
