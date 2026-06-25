@@ -2,9 +2,6 @@ backend:
   name: git-gateway
   branch: main
 
-media_folder: public/images/uploads
-public_folder: /images/uploads
-
 collections:
   - name: "blog"
     label: "Blog Posts"
@@ -16,5 +13,99 @@ collections:
       - { label: "Publish Date", name: "date", widget: "datetime" }
       - { label: "Category", name: "category", widget: "select", options: ["SEO", "AEO", "Growth", "Case Chronicles", "Reputation"] }
       - { label: "Description", name: "description", widget: "string" }
-      - { label: "Featured Image", name: "image", widget: "image", required: false }
-      - { label: "Body", name: "body", widget: "markdown" }
+      - label: "Body"
+        name: "body"
+        widget: "markdown"
+        default: |
+          Why More Students Are Choosing Germany for Higher Education
+
+          ---
+
+          ## TL;DR
+
+          3-5 bullet points summarizing the article.
+
+          Example:
+
+          - Germany offers low-cost education.
+          - English-taught programs are increasing.
+          - Demand from Indian students is rising.
+          - Scholarships are widely available.
+          - Students should start planning early.
+
+          ---
+
+          ## What's Happening?
+
+          Explain the topic, trend, opportunity, or update.
+
+          Keep it simple and factual.
+
+          ---
+
+          ## Why It Matters
+
+          Why should students care?
+
+          Explain the impact on:
+
+          - Careers
+          - Education
+          - Opportunities
+          - Future decisions
+
+          ---
+
+          ## The Opportunity
+
+          What advantage can students gain?
+
+          Examples:
+
+          - Scholarship opportunities
+          - Better career prospects
+          - New industry demand
+          - Alternative education paths
+
+          ---
+
+          ## What Students Should Do Next
+
+          Actionable steps.
+
+          Example:
+
+          1. Research universities.
+          2. Check eligibility requirements.
+          3. Prepare language documents.
+          4. Explore scholarships.
+
+          ---
+
+          ## Key Takeaways
+
+          Quick summary:
+
+          ✓ What's important
+
+          ✓ What changed
+
+          ✓ What to do next
+
+          ---
+
+          ## Final Take
+
+          One strong opinion or conclusion.
+
+          Example:
+
+          Germany is becoming one of the best-value study-abroad destinations for Indian students, but students who start preparing early will have the biggest advantage.
+
+          ---
+
+          ## Related Reading
+
+          - Best Scholarships for Indian Students
+          - Germany vs Canada for Study Abroad
+          - How to Apply for DAAD Scholarships

@@ -3,7 +3,6 @@ title: "Local SEO & AI Search Engine Optimization (AEO) Trends for 2026"
 date: 2026-06-24T12:00:00.000Z
 category: "AEO"
 description: "Discover the latest trends in local pack optimization, conversational answer search engines, and citation index strategies for Indian businesses in 2026."
-image: "/images/uploads/seo-trends.jpg"
 ---
 
 # Local SEO & AEO Trends for 2026

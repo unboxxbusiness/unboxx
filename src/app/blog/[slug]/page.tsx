@@ -197,26 +197,49 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 function renderMarkdown(body: string) {
   const lines = body.split("\n");
   const parsedNodes: React.ReactNode[] = [];
-  let inList = false;
   let listItems: React.ReactNode[] = [];
+  let listType: "bullet" | "ordered" | null = null;
+
+  const flushList = (key: string | number) => {
+    if (!listType) return;
+    if (listType === "bullet") {
+      parsedNodes.push(
+        <ul
+          key={`list-${key}`}
+          className="list-disc pl-6 space-y-2 mb-6 text-sm md:text-base leading-relaxed text-text-muted"
+        >
+          {listItems}
+        </ul>
+      );
+    } else if (listType === "ordered") {
+      parsedNodes.push(
+        <ol
+          key={`list-${key}`}
+          className="list-decimal pl-6 space-y-2 mb-6 text-sm md:text-base leading-relaxed text-text-muted"
+        >
+          {listItems}
+        </ol>
+      );
+    }
+    listType = null;
+    listItems = [];
+  };
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i].trim();
 
     // Handle empty lines
     if (!line) {
-      if (inList) {
-        parsedNodes.push(
-          <ul
-            key={`list-${i}`}
-            className="list-disc pl-6 space-y-2 mb-6 text-sm md:text-base leading-relaxed text-text-muted"
-          >
-            {listItems}
-          </ul>
-        );
-        inList = false;
-        listItems = [];
-      }
+      flushList(i);
+      continue;
+    }
+
+    // Handle Horizontal Rules
+    if (line === "---") {
+      flushList(i);
+      parsedNodes.push(
+        <hr key={i} className="my-8 border-t border-stone-200" />
+      );
       continue;
     }
 
@@ -224,18 +247,7 @@ function renderMarkdown(body: string) {
     if (line.startsWith("![") && line.endsWith(")")) {
       const match = line.match(/^!\[(.*?)\]\((.*?)\)$/);
       if (match) {
-        if (inList) {
-          parsedNodes.push(
-            <ul
-              key={`list-list-${i}`}
-              className="list-disc pl-6 space-y-2 mb-6 text-sm md:text-base leading-relaxed text-text-muted"
-            >
-              {listItems}
-            </ul>
-          );
-          inList = false;
-          listItems = [];
-        }
+        flushList(i);
         const [, alt, url] = match;
         parsedNodes.push(
           <img
@@ -251,6 +263,7 @@ function renderMarkdown(body: string) {
 
     // Handle Headers
     if (line.startsWith("# ")) {
+      flushList(i);
       parsedNodes.push(
         <h1
           key={i}
@@ -260,6 +273,7 @@ function renderMarkdown(body: string) {
         </h1>
       );
     } else if (line.startsWith("## ")) {
+      flushList(i);
       parsedNodes.push(
         <h2
           key={i}
@@ -269,6 +283,7 @@ function renderMarkdown(body: string) {
         </h2>
       );
     } else if (line.startsWith("### ")) {
+      flushList(i);
       parsedNodes.push(
         <h3
           key={i}
@@ -280,28 +295,33 @@ function renderMarkdown(body: string) {
     }
     // Handle Bullet Lists
     else if (line.startsWith("- ") || line.startsWith("* ")) {
+      if (listType !== "bullet") {
+        flushList(i);
+        listType = "bullet";
+      }
       const cleanItem = line.replace(/^[-*]\s+/, "");
       listItems.push(
         <li key={i} className="leading-relaxed">
           {parseInlineFormatting(cleanItem)}
         </li>
       );
-      inList = true;
+    }
+    // Handle Numbered Lists
+    else if (/^\d+\.\s+/.test(line)) {
+      if (listType !== "ordered") {
+        flushList(i);
+        listType = "ordered";
+      }
+      const cleanItem = line.replace(/^\d+\.\s+/, "");
+      listItems.push(
+        <li key={i} className="leading-relaxed">
+          {parseInlineFormatting(cleanItem)}
+        </li>
+      );
     }
     // Handle standard paragraph text
     else {
-      if (inList) {
-        parsedNodes.push(
-          <ul
-            key={`list-${i}`}
-            className="list-disc pl-6 space-y-2 mb-6 text-sm md:text-base leading-relaxed text-text-muted"
-          >
-            {listItems}
-          </ul>
-        );
-        inList = false;
-        listItems = [];
-      }
+      flushList(i);
       parsedNodes.push(
         <p
           key={i}
@@ -314,16 +334,7 @@ function renderMarkdown(body: string) {
   }
 
   // Flush trailing lists
-  if (inList && listItems.length > 0) {
-    parsedNodes.push(
-      <ul
-        key={`list-end`}
-        className="list-disc pl-6 space-y-2 mb-6 text-sm md:text-base leading-relaxed text-text-muted"
-      >
-        {listItems}
-      </ul>
-    );
-  }
+  flushList("end");
 
   return parsedNodes;
 }
