@@ -70,28 +70,30 @@ export default function RootLayout({
       <head>
         <script
           src="https://identity.netlify.com/v1/netlify-identity-widget.js"
-          onload="
-            if (window.netlifyIdentity) {
-              window.netlifyIdentity.on('init', function(user) {
-                if (!user) {
-                  window.netlifyIdentity.on('login', function() {
-                    document.location.href = '/admin/';
-                  });
-                }
-                
-                // Programmatically trigger the popup if an invite, recovery, or confirmation token is in the hash
-                var hash = window.location.hash;
-                if (
-                  hash.indexOf('invite_token') !== -1 ||
-                  hash.indexOf('recovery_token') !== -1 ||
-                  hash.indexOf('confirmation_token') !== -1
-                ) {
-                  window.netlifyIdentity.open();
-                }
-              });
-              window.netlifyIdentity.init();
-            }
-          "
+          {...{
+            onload: `
+              if (window.netlifyIdentity) {
+                window.netlifyIdentity.on('init', function(user) {
+                  if (!user) {
+                    window.netlifyIdentity.on('login', function() {
+                      document.location.href = '/admin/';
+                    });
+                  }
+                  
+                  // Programmatically trigger the popup if an invite, recovery, or confirmation token is in the hash
+                  var hash = window.location.hash;
+                  if (
+                    hash.indexOf('invite_token') !== -1 ||
+                    hash.indexOf('recovery_token') !== -1 ||
+                    hash.indexOf('confirmation_token') !== -1
+                  ) {
+                    window.netlifyIdentity.open();
+                  }
+                });
+                window.netlifyIdentity.init();
+              }
+            `
+          }}
         />
       </head>
       <body className="font-sans antialiased min-h-screen flex flex-col relative bg-bg-cream text-text-muted">
